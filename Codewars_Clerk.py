@@ -13,10 +13,10 @@ Return YES, if Vasya can sell a ticket to every person and give change with the 
 
 
 def tickets(people: list) -> str:
-    if sum(p for p in people if p == 25) - sum(p for p in people if p > 25) == 0:
+    if people[0] > 25:
+        return "NO"
+    if (sum((p - po) for p, po in zip(people[1:], people[2:]) if p - po != 0) + 25) // 25 == 0:
         return "YES"
     else:
         return "NO"
 
-
-print(tickets([25, 100]))
