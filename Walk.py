@@ -18,5 +18,3 @@ def is_valid_walk(walk: list) -> bool:
         return False
     if sum(1 if w in ('n', 'w') else - 1 for w in walk) == 0:
         return True
-
-print(is_valid_walk(['n', 's', 'n', 's', 'n', 's', 'n', 's', 'n', 's']))
