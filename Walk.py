@@ -16,5 +16,9 @@ Note: you will always receive a valid array containing a random assortment of di
 def is_valid_walk(walk: list) -> bool:
     if len(walk) != 10:
         return False
-    if sum(1 if w in ('n', 'w') else - 1 for w in walk) == 0:
+    lat = sum(1 if l == 'n' else - 1 for l in [w for w in walk if w in ('n', 's')])
+    lon = sum(1 if ln == 'w' else - 1 for ln in [w for w in walk if w in ('e', 'w')])
+    if lat == 0 and lon == 0:
         return True
+    else:
+        return False
