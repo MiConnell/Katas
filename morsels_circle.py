@@ -92,63 +92,22 @@ class Circle(object):
         return pi * self.radius ** 2
 
     @diameter.setter
-    def diameter(self):
-        self.radius = self.diameter / 2
-
-    def __repr__(self):
-        return f"Circle({self.radius})"
-
-
-c = Circle()
-print(c.radius, c.area, c.diameter)
-
-c.radius = 3
-print(c.radius, c.diameter)
-
-
-###########################################################################
-# %%
-from math import pi
-
-
-class Circle(object):
-
-    def __init__(self, radius=1):
-        if radius < 0:
-            raise ValueError("Radius can't be negative")
-        self.radius = radius
-
-    @property
-    def diameter(self):
-        return 2 * self.radius
-
-    @property
-    def area(self):
-        return pi * self.radius ** 2
-
-    @diameter.setter
     def diameter(self, diameter):
-        if self.radius < 0:
-            raise ValueError("Radius can't be negative")
         self.radius = diameter / 2
 
+    @property
+    def radius(self):
+        return self._radius
+
+    @radius.setter
+    def radius(self, radius):
+        if radius < 0:
+            raise ValueError("Radius can't be negative")
+        self._radius = radius
+
     def __repr__(self):
         return f"Circle({self.radius})"
 
+
 c = Circle()
 
-# %%
-c, c.radius, c.diameter, c.area
-# %%
-c.radius = -10
-
-# %%
-c, c.radius, c.diameter, c.area
-
-# %%
-c.diameter = 6
-
-# %%
-c.radius
-
-# %%
