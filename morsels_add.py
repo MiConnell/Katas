@@ -41,6 +41,7 @@ Traceback (most recent call last):
   File "add.py", line 10, in add
     raise ValueError("Given matrices are not the same size.")
 ValueError: Given matrices are not the same size.
+
 """
 
 
@@ -296,6 +297,7 @@ The zip_longest function in the itertools module uses a fill value to return mis
 
 The default fill value for zip_longest is None, so looping over None would fail and adding None to a number would fail too. In both cases we'd get a TypeError which is why we're catching a TypeError to handle the case where matrices aren't the same size.
 
+
 That raise X from Y syntax we're using is a Python 3 feature to make tracebacks more clear.
 
 Let's take a look at one more answer:
@@ -317,5 +319,4 @@ Here we're using a get_shape function to get our list of list lengths for each l
 This is my favorite of the answers to the second bonus, but I don't find any of them considerably more clear or succinct than the others.
 
 I hope you learned something from these solutions. 😄
-
 """
