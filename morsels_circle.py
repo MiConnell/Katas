@@ -76,10 +76,61 @@ This means that diameter cannot be negative either (and setting diameter to a ne
 """
 
 from math import pi
-class Circle:
 
+
+class Circle:
     def __init__(self, radius=1):
-        self.radius=radius
-        self.diameter= 2*self.radius
+        self.radius = radius
+        if self.radius < 0:
+            raise ValueError("Radius cannot be negative")
+        self.diameter = 2*self.radius
         self.area = pi*self.radius**2
 
+    def __repr__(self):
+        return f"Circle({self.radius})"
+
+
+c = Circle()
+print(c.radius, c.area, c.diameter)
+
+c.radius = 3
+print(c.radius, c.diameter)
+
+
+###########################################################################
+# %%
+
+# %%
+
+class Circle(object):
+
+    def __init__(self, radius=1):
+        self.radius = radius
+
+    @property
+    def diameter(self):
+        return 2 * self.radius
+
+    @property
+    def area(self):
+        return pi * self.radius ** 2
+
+    @diameter.setter
+    def diameter(self):
+        self.radius = self.diameter / 2
+
+    def __repr__(self):
+        return f"Circle({self.radius})"
+
+
+# %%
+c = Circle(11)
+# %%
+c, c.radius, c.diameter, c.area
+# %%
+c.radius = -10
+c.diameter = 11
+# %%
+c, c.radius, c.diameter, c.area
+
+# %%
