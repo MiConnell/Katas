@@ -30,16 +30,13 @@ For even more of a bonus try to get your function to ignore punctuation outside 
 {'oh': 1, 'what': 2, 'a': 2, 'day': 2, 'lovely': 1}
 """
 
+from string import punctuation
 
-# %%
+
 def count_words(words: str) -> dict:
+    words = f"{words.encode('ascii', 'ignore').decode('utf-8')}"
+    words = " ".join(
+        w.strip(punctuation) for w in words.split() if w.split(punctuation)
+    )
     words = str.lower(words).split()
     return {w: words.count(w) for w in words}
-
-
-# %%
-test_string = "oh what a day what a lovely day"
-
-count_words(test_string)
-
-# %%
