@@ -31,6 +31,17 @@ For even more of a bonus try to get your function to ignore punctuation outside 
 """
 
 
+# %%
+from collections import Counter
 
-def counter(words: str) -> dict:
-    pass
+def count_words(words: str) -> dict:
+    words = [w for w in str.lower(words).split()]
+    return {w: words.count(w) for w in words}
+
+
+# %%
+test_string = "oh what a day what a lovely day"
+
+count_words(test_string)
+
+# %%
