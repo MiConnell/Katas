@@ -1,3 +1,4 @@
+# https://www.codewars.com/kata/54521e9ec8e60bc4de000d6c/train/python
 """
 The maximum sum subarray problem consists in finding the maximum sum of a contiguous subsequence in an array or list of integers:
 
@@ -14,11 +15,7 @@ def max_sequence(arr: list) -> int:
     rer = arr[::-1]
     if not arr or max(arr) <= 0:
         return 0
-    print(
-        [
-            arr[i:(-e) + 1] for e, _ in enumerate(rer) for i, _ in enumerate(arr)
-        ]
-    )
-
-
-print(max_sequence([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
+    sub = [
+        arr[i:(-e) + 1] for e, _ in enumerate(rer) for i, _ in enumerate(arr)
+    ]
+    return max(sum(s) for s in sub)
