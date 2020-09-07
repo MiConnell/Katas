@@ -39,7 +39,3 @@ def tail(start, num) -> list:
         return []
     start = list(start)
     return start[-num:]
-
-nums = (n**2 for n in [1, 2, 3, 4])
-print(tail(nums, 2))
-print(tail(nums, 3))
