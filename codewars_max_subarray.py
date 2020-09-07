@@ -11,5 +11,14 @@ Empty list is considered to have zero greatest sum. Note that the empty list or 
 """
 
 def max_sequence(arr: list) -> int:
+    rer = arr[::-1]
     if not arr or max(arr) <= 0:
         return 0
+    print(
+        [
+            arr[i:(-e) + 1] for e, _ in enumerate(rer) for i, _ in enumerate(arr)
+        ]
+    )
+
+
+print(max_sequence([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
