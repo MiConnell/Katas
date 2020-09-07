@@ -34,9 +34,12 @@ See if you can make your function relatively memory efficient (if you're looping
 
 """
 
-
-def tail(input, num) -> list:
-    input = list(input)
+def tail(start, num) -> list:
     if num <= 0:
         return []
-    return list(input[-num:])
+    start = list(start)
+    return start[-num:]
+
+nums = (n**2 for n in [1, 2, 3, 4])
+print(tail(nums, 2))
+print(tail(nums, 3))
