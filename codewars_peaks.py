@@ -23,13 +23,9 @@ Have fun!
 
 def pick_peaks(arr: list) -> dict:
     result = [
-        middle
-        for left, middle, right in zip(arr, arr[1:], arr[2:])
+        (idx + 1, middle)
+        for idx, (left, middle, right) in enumerate(zip(arr, arr[1:], arr[2:]))
         if left <= middle and right <= middle
     ]
-    loc = [res for res in result]
-    return {'pos': loc, 'peaks': result}
-
-lst = [3, 2, 3, 6, 4, 1, 2, 3, 2, 1, 2, 3]
-
-print(pick_peaks(lst))
+    loc = [res[0] for res in result]
+    return {'pos': loc, 'peaks': [r for r in result[0][::-1]]}
