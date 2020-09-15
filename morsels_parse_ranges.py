@@ -55,8 +55,10 @@ def parse_ranges(nums: str) -> list:
     lst = []
     for f in fin:
         if len(f) == 1:
-            print(str(f[0]))
-        for i in range(int(f[0]), int(f[-1])):
-            print(i)
+            lst.append(str(f[0]))
+        else:
+            for i in range(int(f[0]), int(f[-1]) + 1):
+                lst.append(i)
+    return lst
 
 print(parse_ranges('0,4-8,20,43-45'))
