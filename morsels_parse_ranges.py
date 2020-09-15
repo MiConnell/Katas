@@ -50,8 +50,13 @@ For example we include 20 here, but ignore -> and "exit":
 
 
 def parse_ranges(nums: str) -> list:
-    lst = nums.split('-')
-    return [str(i).split(',') for i in lst]
-
+    sep = nums.split(',')
+    fin = [s.split('-') for s in sep]
+    lst = []
+    for f in fin:
+        if len(f) == 1:
+            print(str(f[0]))
+        for i in range(int(f[0]), int(f[-1])):
+            print(i)
 
 print(parse_ranges('0,4-8,20,43-45'))
