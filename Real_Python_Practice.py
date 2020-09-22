@@ -29,4 +29,51 @@ def add_it_up(n: int) -> list:
         return 0
     return sum(range(n + 1))
 
-print(add_it_up(9))
+
+"""
+Python Practice Problem 2: Caesar Cipher
+The next question is a two-parter. You’ll code up a function to compute a Caesar cipher on text input.
+For this problem, you’re free to use any part of the Python standard library to do the transform.
+
+Hint: There’s a function in the string library that will make this task much easier!
+
+Problem Description
+The problem statement is at the top of the skeleton source file:
+
+# caesar.py
+Caesar Cipher
+    A Caesar cipher is a simple substitution cipher in which each letter of the
+    plain text is substituted with a letter found by moving n places down the
+    alphabet. For example, assume the input plain text is the following:
+
+        abcd xyz
+
+    If the shift value, n, is 4, then the encrypted text would be the following:
+
+        efgh bcd
+
+    You are to write a function that accepts two arguments, a plain-text
+    message and a number of letters to shift in the cipher. The function will
+    return an encrypted string with all letters transformed and all
+    punctuation and whitespace remaining unchanged.
+
+    Note: You can assume the plain text is all lowercase ASCII except for
+    whitespace and punctuation.
+
+Remember, this part of the question is really about how well you can get around in the standard library.
+If you find yourself figuring out how to do the transform without the library, then save that thought! You’ll need it later!
+"""
+
+import string
+
+def cipher(alpha: str, shift: int) -> str:
+    full_bet = list(string.ascii_lowercase)
+    lst = []
+    for a in alpha:
+        if a in full_bet:
+            a = full_bet[full_bet.index(a) + shift]
+        a = a
+        lst.append(a)
+    return " ".join(lst)
+
+print(cipher('this is a test', 6))
