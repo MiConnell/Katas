@@ -22,3 +22,11 @@ and returns the sum of the integers from zero to the input parameter.
 The function should return 0 if a non-integer is passed in.
 Remember to run the unit tests until you get them passing!
 """
+
+
+def add_it_up(n: int) -> list:
+    if type(n) != int:
+        return 0
+    return sum(range(n + 1))
+
+print(add_it_up(9))
