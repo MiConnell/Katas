@@ -21,4 +21,15 @@ NOTE 2: The 0x0 (empty matrix) is represented as en empty array inside an array[
 """
 
 def snail(snail_map) -> list:
-    return 
+    pre = snail_map[0][:-1]
+    fst = [s[-1] for s in snail_map]
+    scnd = snail_map[-1][::-1][1:]
+    lst = snail_map[1][:-1]
+    return pre + fst + scnd + lst
+
+
+array = [[1, 2, 3],
+         [4, 5, 6],
+         [7, 8, 9]]
+
+print(snail(array))
