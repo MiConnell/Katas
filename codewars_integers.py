@@ -1,6 +1,5 @@
 # https://www.codewars.com/kata/55aa075506463dac6600010d/train/python
 
-
 """
 Divisors of 42 are : 1, 2, 3, 6, 7, 14, 21, 42.
 These divisors squared are: 1, 4, 9, 36, 49, 196, 441, 1764.
@@ -16,8 +15,8 @@ each subarray having two elements, first the number whose squared divisors is a 
 list_squared(1, 250) --> [[1, 1], [42, 2500], [246, 84100]]
 list_squared(42, 250) --> [[42, 2500], [246, 84100]]
 The form of the examples may change according to the language, see Example Tests: for more details.
-
-Note
-
-In Fortran - as in any other language - the returned string is not permitted to contain any redundant trailing whitespace: you can use dynamically allocated character strings.
 """
+
+
+def list_squared(m: int, n: int) -> list:
+    return [k ** 2 for i in range(m, n + 1) for k in range(1, i + 1) if i % k == 0]
