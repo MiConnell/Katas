@@ -67,13 +67,8 @@ If you find yourself figuring out how to do the transform without the library, t
 import string
 
 def cipher(alpha: str, shift: int) -> str:
-    full_bet = list(string.ascii_lowercase)
-    lst = []
-    for a in alpha:
-        if a in full_bet:
-            a = full_bet[full_bet.index(a) + shift]
-        a = a
-        lst.append(a)
-    return " ".join(lst)
-
+    full_bet = string.ascii_lowercase
+    mask = full_bet[shift:] + full_bet[:shift]
+    translation = str.maketrans(full_bet, mask)
+    return alpha.translate(translation)
 print(cipher('this is a test', 6))
