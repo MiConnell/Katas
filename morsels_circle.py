@@ -110,4 +110,3 @@ class Circle(object):
 
 
 c = Circle()
-

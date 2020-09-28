@@ -47,5 +47,10 @@ For the second bonus, try to automatically detect the delimiter if an in-delimit
 
 This second bonus is a bit trickier and I don't expect it to work correctly for all files. Don't be afraid to check the hints for this one.
 """
-
+import sys
 import csv
+
+with open(sys.argv[1], 'rt') as f:
+    tmp = csv.reader(f)
+    for row in tmp:
+        print(row)

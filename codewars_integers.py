@@ -19,4 +19,10 @@ The form of the examples may change according to the language, see Example Tests
 
 
 def list_squared(m: int, n: int) -> list:
-    return [k ** 2 for i in range(m, n + 1) for k in range(1, i + 1) if i % k == 0]
+    return [
+        k ** 2 for i in range(m, n + 1)
+        for k in range(1, i + 1)
+        if i % k == 0
+    ]
+
+print(list_squared(1, 20))

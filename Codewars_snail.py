@@ -1,4 +1,4 @@
-# https://www.codewars.com/kata/521c2db8ddc89b9b7a0000c1/python
+# https://www.codewars.com/kata/521c2db8ddc89b9b7a0000c1/train/python
 """
 Given an n x n array, return the array elements arranged from outermost elements to the middle element, traveling clockwise.
 
@@ -28,8 +28,10 @@ def snail(snail_map) -> list:
     return pre + fst + scnd + lst
 
 
-array = [[1, 2, 3],
-         [4, 5, 6],
-         [7, 8, 9]]
+# array = [[1, 2, 3],
+#         [4, 5, 6],
+#         [7, 8, 9]]
+
+array = [[]]
 
 print(snail(array))
