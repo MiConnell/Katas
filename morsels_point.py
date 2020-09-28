@@ -53,9 +53,12 @@ For the third bonus, I'd like you to allow Point objects to be unpacked using mu
 
 class Point:
     def __init__(self, x, y, z):
-        self.x = x
-        self.y = y
-        self.z = z
+        self.x, self.y, self.z = x, y, z
+
+    def __iter__(self):
+        yield self.x
+        yield self.y
+        yield self.z
 
     def __repr__(self):
         return f'Point(x={self.x}, y={self.y}, z={self.z})'
@@ -83,9 +86,3 @@ class Point:
 
     def __rmul__(self, other):
         return Point(other * self.x, other * self.y, other * self.z)
-
-
-p1 = Point(1, 2, 3)
-p2 = p1 * 2
-p3 = 3 * p1
-print(p2, p3)
