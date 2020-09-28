@@ -65,3 +65,16 @@ class Point:
             return NotImplemented
 
         return self.x == other.x and self.y == other.y and self.z == other.z
+
+    def __add__(self, other):
+        return Point(self.x + other.x, self.y + other.y, self.z + other.z)
+
+    def __sub__(self, other):
+        return Point(self.x - other.x, self.y - other.y, self.z - other.z)
+
+
+p1 = Point(1, 2, 3)
+p2 = Point(1, 2, 3)
+
+p3 = p1 - p2
+print(p3)
