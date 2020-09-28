@@ -67,14 +67,25 @@ class Point:
         return self.x == other.x and self.y == other.y and self.z == other.z
 
     def __add__(self, other):
+        if not isinstance(other, Point):
+            return NotImplemented
+
         return Point(self.x + other.x, self.y + other.y, self.z + other.z)
 
     def __sub__(self, other):
+        if not isinstance(other, Point):
+            return NotImplemented
+
         return Point(self.x - other.x, self.y - other.y, self.z - other.z)
+
+    def __mul__(self, other):
+        return Point(other * self.x, other * self.y, other * self.z)
+
+    def __rmul__(self, other):
+        return Point(other * self.x, other * self.y, other * self.z)
 
 
 p1 = Point(1, 2, 3)
-p2 = Point(1, 2, 3)
-
-p3 = p1 - p2
-print(p3)
+p2 = p1 * 2
+p3 = 3 * p1
+print(p2, p3)
