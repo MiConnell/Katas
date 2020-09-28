@@ -59,3 +59,9 @@ class Point:
 
     def __repr__(self):
         return f'Point(x={self.x}, y={self.y}, z={self.z})'
+
+    def __eq__(self, other):
+        if not isinstance(other, Point):
+            return NotImplemented
+
+        return self.x == other.x and self.y == other.y and self.z == other.z
