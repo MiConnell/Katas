@@ -42,11 +42,31 @@ If you solved this one really quickly, here's a more challenging third bonus for
 True
 """
 
+
 def is_anagram(first: str, second: str) -> bool:
-    first = sorted([f for f in str.lower(first.replace(" ", ""))])
-    second = sorted([s for s in str.lower(second.replace(" ", ""))])
+    first = sorted(
+        [
+            f
+            for f in str.lower(
+                first.translate(str.maketrans("", "", string.punctuation)).replace(
+                    " ", ""
+                )
+            )
+        ]
+    )
+    second = sorted(
+        [
+            s
+            for s in str.lower(
+                second.translate(str.maketrans("", "", string.punctuation)).replace(
+                    " ", ""
+                )
+            )
+        ]
+    )
     return first == second
     # convert letters to numbers and compare sums
     # convert strings to list then sort and compare
 
-print(is_anagram('eat', 'tea'))
+
+print(is_anagram("eat", "tea"))
