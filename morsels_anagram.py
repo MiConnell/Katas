@@ -43,4 +43,10 @@ True
 """
 
 def is_anagram(first: str, second: str) -> bool:
-    return True
+    first = sorted([f for f in str.lower(first.replace(" ", ""))])
+    second = sorted([s for s in str.lower(second.replace(" ", ""))])
+    return first == second
+    # convert letters to numbers and compare sums
+    # convert strings to list then sort and compare
+
+print(is_anagram('eat', 'tea'))
