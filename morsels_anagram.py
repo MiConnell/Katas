@@ -41,7 +41,7 @@ If you solved this one really quickly, here's a more challenging third bonus for
 >> > is_anagram("cardiografía", "radiográfica")
 True
 """
-
+import string
 
 def is_anagram(first: str, second: str) -> bool:
     first = sorted(
