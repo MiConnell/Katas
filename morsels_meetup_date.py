@@ -63,7 +63,6 @@ import datetime
 
 
 class Weekday:
-
     MONDAY = 0
     TUESDAY = 1
     WEDNESDAY = 2
