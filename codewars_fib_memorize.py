@@ -8,7 +8,7 @@ def fibonacci(n):
         return n
     return fibonacci(n - 1) + fibonacci(n - 2)
 
-This algorithm serves welll its educative purpose but it's tremendously inefficient,
+This algorithm serves well its educative purpose but it's tremendously inefficient,
 not only because of recursion, but because we invoke the fibonacci function twice,
 and the right branch of recursion (i.e. fibonacci(n-2))
 recalculates all the Fibonacci numbers already calculated by the left branch(i.e. fibonacci(n-1)).
@@ -30,7 +30,16 @@ Refactor the function into a recursive Fibonacci function that using a memoized 
 Can you make it so the memoization cache is private to this function?
 """
 
+def memoizaiton(f):
+    memo = {}
 
+    def helper(x):
+        if x not in memo:
+            memo[x] = f(x)
+        return memo[x]
+    return helper
+
+@memoizaiton
 def fibonacci(n):
     if n in [0, 1]:
         return n
