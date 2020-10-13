@@ -66,10 +66,14 @@ def meetup_date(
     year: int, month: int, nth: int = None, weekday: int = None
 ) -> datetime.date:
     cal = calendar.monthcalendar(year, month)
-    sdpm = cal[4][3] if cal[0][3] == 0 and (int is None, weekday is None) else cal[3][3]
-    if nth is not None and weekday is not None:
+    if nth is None and weekday is None:
+        sdpm = cal[4][3] if cal[0][3] == 0 else cal[3][3]
+    elif nth is not None and nth >= 0 and weekday is not None:
         sdpm = cal[nth][weekday] if cal[0][weekday] == 0 else cal[nth - 1][weekday]
+    elif nth is not None and nth < 0 and weekday is not None:
+        sdpm = cal[nth][weekday] if cal[nth][weekday] != 0 else cal[nth - 1][weekday]
     return datetime.date(year, month, sdpm)
 
-
-print(meetup_date(2016, 2, nth=4, weekday=3))
+print(
+    meetup_date(2016, 2, nth=-1, weekday=3)
+)
