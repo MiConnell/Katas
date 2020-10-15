@@ -24,10 +24,6 @@ addTwo(3)(5); // 10
 We can assume any number being passed in will be valid whole number.
 """
 
-
-class Adder(int):
-    def __call__(self, v):
-        return Adder(self + v)
-
-def add(x):
-    return Adder(x)
+class add(int):
+    def __call__(self, n):
+        return add(self + n)
