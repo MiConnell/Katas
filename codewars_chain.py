@@ -25,9 +25,9 @@ We can assume any number being passed in will be valid whole number.
 """
 
 
-class CustomInt(int):
+class Adder(int):
     def __call__(self, v):
-        return CustomInt(self + v)
+        return Adder(self + v)
 
 def add(x):
-    return CustomInt(x)
+    return Adder(x)
