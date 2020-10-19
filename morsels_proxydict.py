@@ -80,6 +80,7 @@ from littlebaker import littlebaker
 class ProxyDict:
     def __init__(self, data: dict):
         self._dict = data
+        self._keys, self._values = self._dict.keys(), self._dict.values()
         self._len = len(self._dict)
 
     def __len__(self):
@@ -87,6 +88,12 @@ class ProxyDict:
 
     def __getitem__(self, i):
         return self._dict[i]
+
+    def __iter__(self):
+        return iter(self._keys)
+
+    def __repr__(self):
+        return f"ProxyDict({self._dict})"
 
     def keys(self) -> list:
         return [k for k in self._dict.keys()]
@@ -110,5 +117,5 @@ class ProxyDict:
 dct = {"a": "b", "c": "d"}
 pd = ProxyDict(dct)
 
-print(pd.get("a"))
-print(pd.get("z"))
+for key in pd:
+    print(key)
