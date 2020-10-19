@@ -20,7 +20,10 @@ Traceback (most recent call last):
 TypeError: 'ProxyDict' object does not support item assignment
 The ProxyDict class should support key lookups and should have a keys method.
 
-Note that if the original dictionary passed to ProxyDict changes, our ProxyDict object should change as well. Put another way, our ProxyDict instances shouldn't copy the dictionary given to them but should wrap around it, "proxying" to it.
+Note that if the original dictionary passed to ProxyDict changes,
+our ProxyDict object should change as well. Put another way,
+our ProxyDict instances shouldn't copy the dictionary given to them but should wrap around it,
+"proxying" to it.
 
 >>> user_data = {'name': 'Trey Hunner', 'active': False}
 >>> proxy_data = ProxyDict(user_data)
@@ -29,7 +32,8 @@ Note that if the original dictionary passed to ProxyDict changes, our ProxyDict 
 True
 Bonus 1
 
-For the first bonus, I'd like you to make your ProxyDict class support for the built-in len function, and add items, values, and get methods (just like the ones that dictionaries have).
+For the first bonus, I'd like you to make your ProxyDict class
+support for the built-in len function, and add items, values, and get methods (just like the ones that dictionaries have).
 
 >>> user_data = {'name': 'Trey Hunner', 'active': False}
 >>> proxy_data = ProxyDict(user_data)
@@ -45,7 +49,8 @@ dict_values(['Trey Hunner', False])
 0
 Bonus 2
 
-For the second bonus, I'd like you to allow your ProxyDict objects to be iterable and I'd like them to have a nice string representation.
+For the second bonus, I'd like you to allow your ProxyDict
+objects to be iterable and I'd like them to have a nice string representation.
 
 >>> user_data = {'name': 'Trey Hunner', 'active': False}
 >>> proxy_data = ProxyDict(user_data)
@@ -58,7 +63,8 @@ For the second bonus, I'd like you to allow your ProxyDict objects to be iterabl
 ProxyDict({'name': 'Trey Hunner', 'active': False})
 Bonus 3
 
-For the third bonus, your ProxyDict objects should support equality with other dictionaries and other ProxyDict instances:
+For the third bonus, your ProxyDict objects should support
+equality with other dictionaries and other ProxyDict instances:
 
 >>> user_data = {'name': 'Trey Hunner', 'active': False}
 >>> p1 = ProxyDict(user_data)
@@ -68,3 +74,22 @@ True
 >>> p2 == user_data
 True
 """
+from littlebaker import littlebaker
+class ProxyDict:
+    def __init__(self, data: dict):
+        self._dict = data
+
+    def __iter__(self):
+        ...
+
+    def __getitem__(self, i):
+        return self._dict[i]
+
+    def keys(self) -> list:
+        return [k for k in self._dict.keys()]
+
+
+dct = {'a': 'b', 'c': 'd'}
+pd = ProxyDict(dct)
+
+print(pd['a'])
