@@ -75,12 +75,15 @@ True
 True
 """
 from littlebaker import littlebaker
+
+
 class ProxyDict:
     def __init__(self, data: dict):
         self._dict = data
+        self._len = len(self._dict)
 
-    def __iter__(self):
-        ...
+    def __len__(self):
+        return self._len
 
     def __getitem__(self, i):
         return self._dict[i]
@@ -88,8 +91,24 @@ class ProxyDict:
     def keys(self) -> list:
         return [k for k in self._dict.keys()]
 
+    def items(self) -> list:
+        return [(i, v) for i, v in zip(self._dict.keys(), self._dict.values())]
 
-dct = {'a': 'b', 'c': 'd'}
+    def values(self) -> list:
+        return [v for v in self._dict.values()]
+
+    def get(self, ky, val=None):
+        self._key = ky
+        self._value = val
+
+        if self._key not in self._dict.keys():
+            return self._value
+        else:
+            return self._dict[self._key]
+
+
+dct = {"a": "b", "c": "d"}
 pd = ProxyDict(dct)
 
-print(pd['a'])
+print(pd.get("a"))
+print(pd.get("z"))
