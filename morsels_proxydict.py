@@ -74,8 +74,6 @@ True
 >>> p2 == user_data
 True
 """
-from littlebaker import littlebaker
-
 
 class ProxyDict:
     def __init__(self, data: dict):
@@ -118,12 +116,3 @@ class ProxyDict:
             return self._value
         else:
             return self._dict[self._key]
-
-
-mapping1 = {'a': 1, 'b': 2}
-mapping2 = {'a': 1}
-a = ProxyDict(mapping1)
-b = ProxyDict(mapping2)
-c = ProxyDict(mapping1)
-
-print(a == mapping1)
