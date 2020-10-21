@@ -92,6 +92,12 @@ class ProxyDict:
     def __iter__(self):
         return iter(self._keys)
 
+    def __eq__(self, other):
+        if isinstance(other, ProxyDict):
+            return self._dict == other._dict
+        else:
+            raise NotImplementedError()
+
     def __repr__(self):
         return f"ProxyDict({self._dict})"
 
@@ -114,8 +120,10 @@ class ProxyDict:
             return self._dict[self._key]
 
 
-dct = {"a": "b", "c": "d"}
-pd = ProxyDict(dct)
+mapping1 = {'a': 1, 'b': 2}
+mapping2 = {'a': 1}
+a = ProxyDict(mapping1)
+b = ProxyDict(mapping2)
+c = ProxyDict(mapping1)
 
-for key in pd:
-    print(key)
+print(a == mapping1)
