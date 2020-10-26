@@ -53,5 +53,9 @@ To be a complex perfect square, the complex square root of the number must have 
 Note that you don't need to handle really big complex numbers.
 """
 
+from math import sqrt
+
 def is_perfect_square(num: int, complex=False) -> bool:
-    ...
+    if not complex and num < 1:
+        return False
+    return sqrt(num).is_integer()
