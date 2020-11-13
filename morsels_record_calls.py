@@ -83,22 +83,30 @@ TypeError("unsupported operand type(s) for ** or pow(): 'NoneType' and 'int'")
 >>> cube.calls[-1].return_value == NO_RETURN
 True
 """
-from typing import Callable
-# from dataclasses import dataclass
-# from functools import wraps
+
+
+from dataclasses import dataclass
+from functools import wraps
+from typing import Callable, Any
+
+
+@dataclass
+class Call:
+    args: tuple
+    kwargs: dict
+
 
 def record_calls(func: Callable[[str], None]):
-    def inner():
-        try:
-            func.call_count += 1
-        except AttributeError:
-            func.call_count = 1
-        return func.call_count
+    @wraps(func)
+    def inner(*args: Any, **kwargs: Any) -> Any:
+        inner.call_count += 1
+        return func(*args, **kwargs)
+
+    inner.call_count = 0
     return inner
+
 
 @record_calls
 def greet(name: str = "world") -> None:
     """Greet someone by their name."""
     print(f"Hello {name}")
-
-print(greet())
