@@ -50,3 +50,29 @@ For the third bonus, I'd like you to make sure deep_flatten works with strings â
 >>> list(deep_flatten([['apple', 'pickle'], ['pear', 'avocado']]))
 ['apple', 'pickle', 'pear', 'avocado']
 """
+
+
+from typing import Any, List
+
+
+def is_iter(val):
+    try:
+        iter(val)
+        return True
+    except TypeError:
+        return False
+
+
+def deep_flatten(itr: List[Any]) -> List[Any]:
+    lst = []
+    for i in itr:
+        if is_iter(i):
+            for it in i:
+                if is_iter(it):
+                    for t in it:
+                        lst.append(t)
+                else:
+                    lst.append(it)
+        else:
+            lst.append(i)
+    return lst
