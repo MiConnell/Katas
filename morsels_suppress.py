@@ -84,7 +84,7 @@ from contextlib import contextmanager
 
 
 @contextmanager
-def suppress(error_type):
+def suppress(*error_type):
     try:
         yield
     except Exception as e:
