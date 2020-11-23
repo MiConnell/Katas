@@ -78,3 +78,17 @@ This decorator should essentially wrap your function in a call to the suppress c
 >>> len_or_none([])
 0
 """
+
+
+from contextlib import contextmanager
+
+
+@contextmanager
+def suppress(error_type):
+    try:
+        yield
+    except Exception as e:
+        if isinstance(e, error_type):
+            return
+        else:
+            raise (e)
