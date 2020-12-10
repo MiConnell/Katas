@@ -4,7 +4,8 @@
 Problem Statement
 Hi!
 
-This week I'd like you to write a FuzzyString class which acts like a string, but does comparisons in a case-insensitive way.
+This week I'd like you to write a FuzzyString class which acts like a string,
+but does comparisons in a case-insensitive way.
 
 For example:
 
@@ -15,7 +16,9 @@ True
 False
 >>> greeting
 'Hey TREY!'
-I'd like you to make sure equality and inequality match case-insensitively at first. I'd also like you to ensure that the string representations of your class match Python's string objects' default string representations.
+I'd like you to make sure equality and inequality match case-insensitively at first.
+I'd also like you to ensure that the string representations of your class match
+Python's string objects' default string representations.
 
 For the first bonus, try to ensure the other comparison operators work as expected:
 
@@ -50,5 +53,34 @@ True
 True
 """
 
+from typing import Iterable
+from functools import total_ordering
+
+
+@total_ordering
 class FuzzyString:
-    pass
+    def __init__(self, greeting: str) -> None:
+        self.greeting = greeting
+        self.updated_greeting = None
+
+    def __repr__(self) -> str:
+        return (self.updated_greeting or self.greeting)
+
+    def __iter__(self) -> Iterable[str]:
+        yield from (self.updated_greeting or self.greeting)
+
+    def __contains__(self, other: str) -> bool:
+        return other.lower() in (self.updated_greeting or self.greeting).lower()
+
+    def __eq__(self, other: str) -> bool:
+        return (self.updated_greeting or self.greeting).lower() == other.lower()
+
+    def __lt__(self, other: str) -> bool:
+        return (self.updated_greeting or self.greeting) > other
+
+    def __gt__(self, other: str) -> bool:
+        return (self.updated_greeting or self.greeting) < other
+
+    def __add__(self, other: str) -> str:
+        self.updated_greeting = "".join([self.greeting, other])
+        return self.updated_greeting
