@@ -44,3 +44,13 @@ different lengths. Short iterables should be skipped over once exhausted ✔️:
 >>> interleave([1, 2, 3], [4, 5], [6, 7, 8, 9])
 [1, 4, 6, 2, 5, 7, 3, 8, 9]
 """
+
+from typing import Any, Iterable
+
+
+def interleave(iter_one: Iterable[Any], iter_two: Iterable[Any]) -> Iterable[Any]:
+    final = []
+    for one, two in zip(iter_one, iter_two):
+        final.append(one)
+        final.append(two)
+    return final
