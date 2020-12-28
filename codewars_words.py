@@ -37,28 +37,22 @@ Bonus points (not really, but just for fun):
 
 from collections import Counter
 from string import punctuation
+from string import ascii_lowercase
 from typing import List
 
-INVALID = [p for p in punctuation if p != "'"]
+INVALID = punctuation.replace("'", "")
 
 
 def top_3_words(inp: str) -> List[str]:
-    inp = inp.replace("".join(INVALID), inp)
-    words = inp.lower().split()
+    inp = inp.translate(str.maketrans("", "", INVALID)).lower()
+    check = any(i in ascii_lowercase for i in inp)
+    if not check:
+        return []
+    words = inp.split()
     c = Counter(words)
     return [a[0] for a in c.most_common(3)]
 
 
+INPUT = "..............."
 if __name__ == "__main__":
-    print(
-        top_3_words(
-            """
-                      In a village of La Mancha, the name of which I have no desire to call to
-        mind, there lived not long since one of those gentlemen that keep a lance
-        in the lance-rack, an old buckler, a lean hack, and a greyhound for
-        coursing. An olla of rather more beef than mutton, a salad on most
-        nights, scraps on Saturdays, lentils on Fridays, and a pigeon or so extra
-        on Sundays, made away with three-quarters of his income.
-        """
-        )
-    )
+    print(top_3_words(INPUT))
