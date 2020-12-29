@@ -1,5 +1,4 @@
 # https://www.pythonmorsels.com/exercises/8a614814784b4264b5085ed9b3358ca3/
-
 """
 Hi,
 

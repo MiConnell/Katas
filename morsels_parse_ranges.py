@@ -1,5 +1,4 @@
 # https://www.pythonmorsels.com/exercises/008c3f7419944ed781eb4924483bff35/
-
 """
 Hi!
 
@@ -47,10 +46,11 @@ For example we include 20 here, but ignore -> and "exit":
 >> > list(parse_ranges('0, 4-8, 20->exit, 43-45'))
 [0, 4, 5, 6, 7, 8, 20, 43, 44, 45]
 """
+from typing import Iterator
 
 
-def parse_ranges(nums: str) -> list:
-    fin = [s.split('-') for s in nums.split(',')]
+def parse_ranges(nums: str) -> Iterator[int]:
+    fin = [s.split("-") for s in nums.split(",")]
     lst = []
     for f in fin:
         if len(f) == 1:
@@ -60,4 +60,5 @@ def parse_ranges(nums: str) -> list:
                 lst.append(i)
     return iter(lst)
 
-print(parse_ranges('0,4-8,20,43-45'))
+
+print(parse_ranges("0,4-8,20,43-45"))

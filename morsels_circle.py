@@ -74,25 +74,23 @@ Traceback (most recent call last):
 ValueError: Radius cannot be negative
 This means that diameter cannot be negative either (and setting diameter to a negative number should also raise a ValueError).
 """
-
 from math import pi
 
 
 class Circle(object):
-
     def __init__(self, radius=1):
-        self.radius = radius
+        self.radius: int = radius
 
     @property
-    def diameter(self):
+    def diameter_(self) -> float:
         return 2 * self.radius
 
     @property
     def area(self):
         return pi * self.radius ** 2
 
-    @diameter.setter
-    def diameter(self, diameter):
+    @diameter_.setter  # type:ignore
+    def diameter(self, diameter: int):
         self.radius = diameter / 2
 
     @property

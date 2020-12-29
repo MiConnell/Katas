@@ -11,11 +11,10 @@ Empty list is considered to have zero greatest sum. Note that the empty list or 
 
 """
 
+
 def max_sequence(arr: list) -> int:
     rer = arr[::-1]
     if not arr or max(arr) <= 0:
         return 0
-    sub = [
-        arr[i:(-e) + 1] for e, _ in enumerate(rer) for i, _ in enumerate(arr)
-    ]
+    sub = [arr[i : (-e) + 1] for e, _ in enumerate(rer) for i, _ in enumerate(arr)]
     return max(sum(s) for s in sub)

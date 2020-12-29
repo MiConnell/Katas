@@ -43,28 +43,31 @@ True
 """
 import string
 
+
 def is_anagram(first: str, second: str) -> bool:
-    first = sorted(
+    first_list = sorted(
         [
             f
             for f in str.lower(
                 first.translate(str.maketrans("", "", string.punctuation)).replace(
-                    " ", ""
-                )
+                    " ",
+                    "",
+                ),
             )
-        ]
+        ],
     )
-    second = sorted(
+    second_list = sorted(
         [
             s
             for s in str.lower(
                 second.translate(str.maketrans("", "", string.punctuation)).replace(
-                    " ", ""
-                )
+                    " ",
+                    "",
+                ),
             )
-        ]
+        ],
     )
-    return first == second
+    return first_list == second_list
     # convert letters to numbers and compare sums
     # convert strings to list then sort and compare
 

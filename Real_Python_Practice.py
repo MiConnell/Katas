@@ -1,6 +1,4 @@
 # https://realpython.com/python-practice-problems/
-
-
 """
 Python Practice Problem 1: Sum of a Range of Integers
 Let’s start with a warm-up question. In the first practice problem, you’ll write code to sum a list of integers.
@@ -24,7 +22,7 @@ Remember to run the unit tests until you get them passing!
 """
 
 
-def add_it_up(n: int) -> list:
+def add_it_up(n: int) -> int:
     if type(n) != int:
         return 0
     return sum(range(n + 1))
@@ -66,9 +64,12 @@ If you find yourself figuring out how to do the transform without the library, t
 
 import string
 
+
 def cipher(alpha: str, shift: int) -> str:
     full_bet = string.ascii_lowercase
     mask = full_bet[shift:] + full_bet[:shift]
     translation = str.maketrans(full_bet, mask)
     return alpha.translate(translation)
-print(cipher('this is a test', 6))
+
+
+print(cipher("this is a test", 6))

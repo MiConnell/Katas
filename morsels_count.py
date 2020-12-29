@@ -1,5 +1,4 @@
 # https://www.pythonmorsels.com/exercises/9af6665915964ee7ba19fe3d762d9ca8/submit/1/
-
 """
 Problem Statement
 Greetings!
@@ -29,14 +28,14 @@ For even more of a bonus try to get your function to ignore punctuation outside 
 >>> count_words("Oh what a day, what a lovely day!")
 {'oh': 1, 'what': 2, 'a': 2, 'day': 2, 'lovely': 1}
 """
-
 from string import punctuation
+from typing import Dict
 
 
-def count_words(words: str) -> dict:
-    words = f"{words.encode('ascii', 'ignore').decode('utf-8')}"
+def count_words(words: str) -> Dict[str, int]:
+    words_coded = f"{words.encode('ascii', 'ignore').decode('utf-8')}"
     words = " ".join(
-        w.strip(punctuation) for w in words.split() if w.split(punctuation)
+        w.strip(punctuation) for w in words_coded.split() if w.split(punctuation)
     )
-    words = str.lower(words).split()
-    return {w: words.count(w) for w in words}
+    words_list = str.lower(words).split()
+    return {w: words_list.count(w) for w in words_list}

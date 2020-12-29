@@ -14,4 +14,8 @@ Note: you will always receive a valid array containing a random assortment of di
 
 
 def is_valid_walk(walk: list) -> bool:
-    return len(walk) == 10 and walk.count('n') == walk.count('s') and walk.count('e') == walk.count('w')
+    return (
+        len(walk) == 10
+        and walk.count("n") == walk.count("s")
+        and walk.count("e") == walk.count("w")
+    )

@@ -1,6 +1,4 @@
 # https://www.codewars.com/kata/51ba717bb08c1cd60f00002f/train/python
-
-
 """
 A format for expressing an ordered list of integers is to use a comma separated list of either individual integers
 or a range of integers denoted by the starting integer separated from the end integer in the range by a dash, '-'.
@@ -14,17 +12,17 @@ solution([-6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20
 # returns "-6,-3-1,3-5,7-11,14,15,17-20"
 
 """
-
-def solution(args):
-    pass
-
 # %%
-def solution(args):
+from typing import List
+
+
+def solution(args: List[int]):
     args = sorted(args)
-    lst = [a for a, b in zip(args, args[1:]) if abs(a-b) == 1]
-    exc = [a for a, b in zip(args, args[1:]) if abs(a-b) != 1]
-    print(f'{lst[0]}-{lst[-1]}')
-    print(f'{exc[0]}-{exc[-1]}')
+    lst = [a for a, b in zip(args, args[1:]) if abs(a - b) == 1]
+    exc = [a for a, b in zip(args, args[1:]) if abs(a - b) != 1]
+    print(f"{lst[0]}-{lst[-1]}")
+    print(f"{exc[0]}-{exc[-1]}")
+
 
 # %%
 solution([1, 2, 3, 4, 6, 7, 8, 9])

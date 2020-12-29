@@ -1,5 +1,4 @@
 # https://www.pythonmorsels.com/exercises/ded322173d47424581be45adaeeca90d/submit/1/
-
 """
 
 Problem Statement
@@ -78,8 +77,6 @@ This decorator should essentially wrap your function in a call to the suppress c
 >>> len_or_none([])
 0
 """
-
-
 from contextlib import contextmanager
 
 

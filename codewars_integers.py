@@ -1,5 +1,4 @@
 # https://www.codewars.com/kata/55aa075506463dac6600010d/train/python
-
 """
 Divisors of 42 are : 1, 2, 3, 6, 7, 14, 21, 42.
 These divisors squared are: 1, 4, 9, 36, 49, 196, 441, 1764.
@@ -19,10 +18,7 @@ The form of the examples may change according to the language, see Example Tests
 
 
 def list_squared(m: int, n: int) -> list:
-    return [
-        k ** 2 for i in range(m, n + 1)
-        for k in range(1, i + 1)
-        if i % k == 0
-    ]
+    return [k ** 2 for i in range(m, n + 1) for k in range(1, i + 1) if i % k == 0]
+
 
 print(list_squared(1, 20))

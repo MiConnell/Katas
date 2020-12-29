@@ -19,16 +19,18 @@ beeramid(1500, 2); // should === 12
 beeramid(5000, 3); // should === 16
 """
 
-def beeramid(bonus: int, price: float) -> int:
+
+def beeramid(bonus: int, price: int) -> int:
     level = 0
     spent = 0
     while spent <= bonus:
         level += 1
         beers = level ** 2
-        spent += (price * beers)
+        spent += price * beers
         if spent > bonus:
             level -= 1
     return level
+
 
 if __name__ == "__main__":
     print(beeramid(1500, 2))

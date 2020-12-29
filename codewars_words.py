@@ -33,11 +33,9 @@ Bonus points (not really, but just for fun):
     Avoid creating an array whose memory footprint is roughly as big as the input text.
     Avoid sorting the entire array of unique words.
 """
-
-
 from collections import Counter
-from string import punctuation
 from string import ascii_lowercase
+from string import punctuation
 from typing import List
 
 INVALID = punctuation.replace("'", "")

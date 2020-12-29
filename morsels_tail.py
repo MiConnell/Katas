@@ -1,5 +1,4 @@
 #  https://www.pythonmorsels.com/exercises/83ed2a27b86b41a185036b262fb67c41/submit/1/
-
 """
 Problem Statement
 Hey there,
@@ -33,6 +32,7 @@ You should make sure you don't loop at all if n is 0 or negative.
 See if you can make your function relatively memory efficient (if you're looping over a very long iterable, don't store the entire thing in memory).
 
 """
+
 
 def tail(start, num) -> list:
     if num <= 0:

@@ -21,6 +21,7 @@ For example: pickPeaks([1, 2, 2, 2, 1]) returns {pos: [1], peaks: [2]} (or equiv
 Have fun!
 """
 
+
 def pick_peaks(arr: list) -> dict:
     result = [
         (idx + 1, middle)
@@ -28,4 +29,4 @@ def pick_peaks(arr: list) -> dict:
         if left <= middle and right <= middle
     ]
     loc = [res[0] for res in result]
-    return {'pos': loc, 'peaks': [r for r in result[0][::-1]]}
+    return {"pos": loc, "peaks": [r for r in result[0][::-1]]}

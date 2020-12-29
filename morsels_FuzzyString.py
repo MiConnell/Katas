@@ -1,5 +1,4 @@
 # https://www.pythonmorsels.com/exercises/9655802abaef47c682555c198ee8b641/submit/1/
-
 """
 Problem Statement
 Hi!
@@ -52,9 +51,8 @@ True
 >>> '\u0301' in e
 True
 """
-
-from typing import Iterable
 from functools import total_ordering
+from typing import Iterable
 
 
 @total_ordering
@@ -64,7 +62,7 @@ class FuzzyString:
         self.updated_greeting = None
 
     def __repr__(self) -> str:
-        return (self.updated_greeting or self.greeting)
+        return self.updated_greeting or self.greeting
 
     def __iter__(self) -> Iterable[str]:
         yield from (self.updated_greeting or self.greeting)
@@ -72,7 +70,7 @@ class FuzzyString:
     def __contains__(self, other: str) -> bool:
         return other.lower() in (self.updated_greeting or self.greeting).lower()
 
-    def __eq__(self, other: str) -> bool:
+    def __eq__(self, other: str) -> bool:  # type:ignore
         return (self.updated_greeting or self.greeting).lower() == other.lower()
 
     def __lt__(self, other: str) -> bool:
@@ -82,5 +80,5 @@ class FuzzyString:
         return (self.updated_greeting or self.greeting) < other
 
     def __add__(self, other: str) -> str:
-        self.updated_greeting = "".join([self.greeting, other])
-        return self.updated_greeting
+        self.updated_greeting = "".join([self.greeting, other])  # type:ignore
+        return self.updated_greeting  # type:ignore

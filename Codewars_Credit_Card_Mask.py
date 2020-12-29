@@ -6,5 +6,6 @@ Usually when you buy something, you're asked whether your credit card number, ph
 Your task is to write a function maskify, which changes all but the last four characters into '#'.
 """
 
+
 def maskify(cc):
     return cc if len(cc) < 4 else f'{"#"*(len(cc)-4)}{cc[-4:]}'

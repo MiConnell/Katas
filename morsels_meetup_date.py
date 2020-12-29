@@ -57,9 +57,9 @@ PyLadies 2018-07-11
 SDHN 2010-06-25
 
 """
-
 import calendar
 import datetime
+from typing import Optional
 
 
 class Weekday:
@@ -73,13 +73,20 @@ class Weekday:
 
 
 def meetup_date(
-    year: int, month: int, nth: int = None, weekday: int = None
+    year: int,
+    month: int,
+    nth: int = 999,
+    weekday: Optional[int] = None,
 ) -> datetime.date:
     cal = calendar.monthcalendar(year, month)
-    if nth is None and weekday is None:
+    if nth == 999 and weekday is None:
         sdpm = cal[4][3] if cal[0][3] == 0 else cal[3][3]
-    if nth is not None and weekday is not None and nth >= 0:
+    if nth is not None and weekday is not None and 999 > nth >= 0:
         sdpm = cal[nth][weekday] if cal[0][weekday] == 0 else cal[nth - 1][weekday]
     elif weekday is not None and nth < 0:
         sdpm = cal[nth][weekday] if cal[nth][weekday] != 0 else cal[nth - 1][weekday]
     return datetime.date(year, month, sdpm)
+
+
+print("PyLadies", meetup_date(2018, 7, nth=-1, weekday=Weekday.WEDNESDAY))
+print(meetup_date(2020, 1))

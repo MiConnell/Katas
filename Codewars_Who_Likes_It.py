@@ -4,21 +4,23 @@ You probably know the "like" system from Facebook and other pages. People can "l
 
 Implement a function likes :: [String] -> String, which must take in input array, containing the names of people who like an item.
 """
+
+
 def likes(names):
     totez = len(names)
-    suffix = ' this'
+    suffix = " this"
     min_likes_singular = 2
-    verb = 'like' if totez >= min_likes_singular else 'likes'
-    summ = f' and {totez - 2} others '
+    verb = "like" if totez >= min_likes_singular else "likes"
+    summ = f" and {totez - 2} others "
     if totez == 0:
-        prefix = 'no one '
+        prefix = "no one "
     elif totez == 1:
-        prefix = f'{names[0]} '
+        prefix = f"{names[0]} "
     elif totez == 2:
-        prefix = f'{names[0]} and {names[1]} '
+        prefix = f"{names[0]} and {names[1]} "
     elif totez == 3:
-        prefix = f'{names[0]}, {names[1]} and {names[2]} '
+        prefix = f"{names[0]}, {names[1]} and {names[2]} "
     else:
-        prefix = f'{names[0]}, {names[1]}{summ}'
+        prefix = f"{names[0]}, {names[1]}{summ}"
 
-    return f'{prefix}{verb}{suffix}'
+    return f"{prefix}{verb}{suffix}"

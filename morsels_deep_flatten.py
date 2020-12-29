@@ -50,9 +50,8 @@ For the third bonus, I'd like you to make sure deep_flatten works with strings â
 >>> list(deep_flatten([['apple', 'pickle'], ['pear', 'avocado']]))
 ['apple', 'pickle', 'pear', 'avocado']
 """
-
-
-from typing import Any, List
+from typing import Any
+from typing import List
 
 
 def is_iter(val):
