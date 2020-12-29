@@ -1,3 +1,5 @@
 *.vscode
 improvement.py
 serenade.py
+.DS_Store
+__pycache__/
