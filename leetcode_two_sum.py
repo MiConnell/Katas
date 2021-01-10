@@ -36,3 +36,28 @@ Constraints:
     Only one valid answer exists.
 
 """
+from typing import List
+
+
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        n = sorted(nums) if sorted(nums) != nums else nums
+        left = 0
+        right = len(n) - 1
+        while left < right:
+            curr = n[left] + n[right]
+            if curr < target:
+                left += 1
+            elif curr > target:
+                right -= 1
+            else:
+                if sorted(nums) != nums:
+                    return [nums.index(n[left]), nums.index(n[right])]
+                else:
+                    return [left, right]
+        return [-1, -1]
