@@ -37,13 +37,12 @@ Constraints:
 
 def longest_palindrome(s: str) -> str:
     sub = ""
-    for i, _ in enumerate(range(len(s))):
-        for end, _ in enumerate(s, start=1):
-            current = s[i:end]
-            if current == current[::-1] and len(current) > len(sub):
-                sub = current
+    start = 0
+    end = 1
+    while end < len(s):
+        pass
     return sub
 
 
 if __name__ == "__main__":
-    print(longest_palindrome("bb"))
+    print(longest_palindrome("babad"))
