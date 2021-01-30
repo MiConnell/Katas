@@ -54,17 +54,24 @@ class User:
         self.rank = -8
         self.progress = 0
 
+    def __repr__(self):
+        return f"<User> {self.rank=} and {self.progress=}"
+
     def _inc_rank(self, activity: int, user: int) -> None:
-        if activity == user:
-            if self.rank == -3:
-                self.rank = 1
-            else:
-                self.rank += 3
-        elif activity - user == -1:
-            if self.rank == -1:
-                self.rank = 1
-            else:
-                self.rank += 1
+        if user - activity >= 2:
+            return
+        if (
+            activity == user
+            and self.rank == -3
+            or activity != user
+            and user - activity == 1
+            and self.rank == -1
+        ):
+            self.rank = 1
+        elif activity == user:
+            self.rank += 3
+        else:
+            self.rank += 1
 
     def inc_progress(self, activity_points: int) -> None:
         d = activity_points - self.rank
@@ -72,3 +79,14 @@ class User:
         if self.progress >= 100:
             self._inc_rank(activity_points, self.rank)
             self.progress -= 100
+
+
+if __name__ == "__main__":
+    user = User()
+    print(user.rank)  # => -8
+    print(user.progress)  # => 0
+    user.inc_progress(-7)
+    print(user.progress)  # => 10
+    user.inc_progress(-5)  # will add 90 progress
+    print(user.progress)  # => 0 # progress is now zero
+    print(user.rank)  # => -7 # rank was upgraded to -7
