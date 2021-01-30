@@ -56,12 +56,12 @@ class User:
 
     def _inc_rank(self, activity: int, user: int) -> None:
         if activity == user:
-            if self.rank < 0 and self.rank == -3:
+            if self.rank == -3:
                 self.rank = 1
             else:
                 self.rank += 3
         elif activity - user == -1:
-            if self.rank < 0 and self.rank == -1:
+            if self.rank == -1:
                 self.rank = 1
             else:
                 self.rank += 1
