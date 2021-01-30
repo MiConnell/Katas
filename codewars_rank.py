@@ -69,9 +69,15 @@ class User:
         ):
             self.rank = 1
         elif activity == user:
-            self.rank += 3
+            if self.rank + 3 not in ALLOWED_RANKS:
+                raise ValueError(f"rank {self.rank} is not valid!")
+            else:
+                self.rank += 3
         else:
-            self.rank += 1
+            if self.rank + 1 not in ALLOWED_RANKS:
+                raise ValueError(f"rank {self.rank} is not valid!")
+            else:
+                self.rank += 1
 
     def inc_progress(self, activity_points: int) -> None:
         d = activity_points - self.rank
