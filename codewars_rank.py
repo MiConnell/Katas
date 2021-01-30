@@ -11,7 +11,9 @@ Business Rules:
     Each time the user completes a ranked activity the users rank progress is updated based off of the activity's rank
     The progress earned from the completed activity is relative to what the user's current rank is compared to the rank of the activity
     A user's rank progress starts off at zero, each time the progress reaches 100 the user's rank is upgraded to the next level
-    Any remaining progress earned while in the previous rank will be applied towards the next rank's progress (we don't throw any progress away). The exception is if there is no other rank left to progress towards (Once you reach rank 8 there is no more progression).
+    Any remaining progress earned while in the previous rank will be applied towards the next rank's progress
+    (we don't throw any progress away).
+    The exception is if there is no other rank left to progress towards (Once you reach rank 8 there is no more progression).
     A user cannot progress beyond rank 8.
     The only acceptable range of rank values is -8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8. Any other value should raise an error.
 
@@ -20,7 +22,9 @@ The progress is scored like so:
     Completing an activity that is ranked the same as that of the user's will be worth 3 points
     Completing an activity that is ranked one ranking lower than the user's will be worth 1 point
     Any activities completed that are ranking 2 levels or more lower than the user's ranking will be ignored
-    Completing an activity ranked higher than the current user's rank will accelerate the rank progression. The greater the difference between rankings the more the progression will be increased. The formula is 10 * d * d where d equals the difference in ranking between the activity and the user.
+    Completing an activity ranked higher than the current user's rank will accelerate the rank progression.
+    The greater the difference between rankings the more the progression will be increased.
+    The formula is 10 * d * d where d equals the difference in ranking between the activity and the user.
 
 Logic Examples:
 
@@ -42,6 +46,29 @@ user.progress # => 0 # progress is now zero
 user.rank # => -7 # rank was upgraded to -7
 """
 
+ALLOWED_RANKS = [-8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8]
+
 
 class User:
-    pass
+    def __init__(self) -> None:
+        self.rank = -8
+        self.progress = 0
+
+    def _inc_rank(self, activity: int, user: int) -> None:
+        if activity == user:
+            if self.rank < 0 and self.rank == -3:
+                self.rank = 1
+            else:
+                self.rank += 3
+        elif activity - user == -1:
+            if self.rank < 0 and self.rank == -1:
+                self.rank = 1
+            else:
+                self.rank += 1
+
+    def inc_progress(self, activity_points: int) -> None:
+        d = activity_points - self.rank
+        self.progress += 10 * d * d
+        if self.progress >= 100:
+            self._inc_rank(activity_points, self.rank)
+            self.progress -= 100
