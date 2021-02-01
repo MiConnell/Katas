@@ -45,7 +45,10 @@ def create_spiral(n: int) -> List[List[int]]:
     max = n ** 2
     mid = [0 for _ in range(min)]
     final = [mid for _ in range(min)]
-
+    first_ = [i for i in range(1, n + 1)]
+    outer_ = [i for i in range(n + 1, n + n)]
+    final[0] = first_
+    final[-1] = [i for i in range(outer_[-1], outer_[-1] + n)][::-1]
     return final
 
 
