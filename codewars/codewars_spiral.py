@@ -40,10 +40,11 @@ from typing import List
 
 def create_spiral(n: int) -> List[List[int]]:
     if n < 1 or type(n) is not int:
-        raise ValueError("Argument must be a positive non-zero integer!")
+        return []
     min = n
     max = n ** 2
-    final: List[List[int]] = [[]]
+    mid = [0 for _ in range(min)]
+    final = [mid for _ in range(min)]
 
     return final
 
