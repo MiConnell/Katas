@@ -33,3 +33,19 @@ map = [[True, False],
 solve(map, {'x':0,'y':0}, {'x':1,'y':1})
 # Should return ['right', 'down']
 """
+from typing import Dict
+from typing import List
+
+
+def solve(
+    map: List[List[bool]],
+    miner: Dict[str, int],
+    exit: Dict[str, int],
+) -> List[str]:
+    pass
+
+
+if __name__ == "__main__":
+    map = [[True, False], [True, True]]
+    print(solve(map, {"x": 0, "y": 0}, {"x": 1, "y": 1}))
+    # Should return ['right', 'down']
