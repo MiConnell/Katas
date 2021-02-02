@@ -41,7 +41,7 @@ from typing import List
 def create_spiral(n: int) -> List[List[int]]:
     if type(n) is not int or n < 1:
         return []
-    result = [[0] * n for i in range(n)]
+    result = [[0] * n for _ in range(n)]
     vectors_x, vectors_y = [0, 1, 0, -1], [1, 0, -1, 0]
     curr_x, curr_y, curr_value = 0, -1, 1
     for i in range(n + n - 1):
