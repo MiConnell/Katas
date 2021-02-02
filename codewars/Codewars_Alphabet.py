@@ -10,7 +10,7 @@ If anything in the text isn't a letter, ignore it and don't return it.
 """
 
 
-def alphabet_position(text):
+def alphabet_position(text: str):
     alphadict = {
         "a": 1,
         "b": 2,
@@ -41,10 +41,5 @@ def alphabet_position(text):
     }
 
     return " ".join(
-        [
-            str(alphadict[key])
-            for t in text.lower()
-            for key in alphadict.keys()
-            if key == t
-        ],
+        str(alphadict[key]) for t in text.lower() for key in alphadict if key == t
     )
