@@ -10,4 +10,13 @@ The knight is not allowed to move off the board. The board is 8x8.
 
 
 def knight(p1: str, p2: str) -> int:
-    pass
+    valid = 3
+    FILE_DICT = {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6, "g": 7, "h": 8}
+    _files = [one[0] for one in (p1, p2)]
+    files = (FILE_DICT[_files[0]], FILE_DICT[_files[1]])
+    ranks = [int(two[1]) for two in (p1, p2)]
+    return 0
+
+
+if __name__ == "__main__":
+    knight("a3", "b5")
