@@ -30,9 +30,48 @@ languages.findMostSimilar('heaven'); // must return "java"
 languages.findMostSimilar('javascript'); // must return "javascript" (same words are obviously the most similar ones)
 ```
 
-I know, many of you would disagree that java is more similar to heaven than all the other ones, but in this kata it is ;)
-
 Additional notes:
 
     there is always exactly one possible correct solution
 """
+from string import ascii_lowercase
+from typing import List
+
+VALUES = {n: s for s, n in enumerate(ascii_lowercase, 1)}
+
+
+class Dictionary:
+    def __init__(self, words: List[str]) -> None:
+        self.words = words
+        self.value_dict = {}
+        for w in self.words:
+            self.value_dict[w] = sum(VALUES[i] for i in w)
+
+    def find_most_similar(self, term: str) -> str:
+        self.term = term
+        self.term_value = sum(VALUES[t] for t in term)
+        self.current = float("inf")
+        self.answer = ""
+        for k, v in self.value_dict.items():
+            if abs(self.term_value - v) < self.current:
+                self.current = v
+                self.answer = k
+        return self.answer
+
+
+if __name__ == "__main__":
+    words = [
+        "cherry",
+        "peach",
+        "pineapple",
+        "melon",
+        "strawberry",
+        "raspberry",
+        "apple",
+        "coconut",
+        "banana",
+    ]
+    test_dict = Dictionary(words)
+    print(test_dict.find_most_similar("strawbery"), "strawberry")
+    print(test_dict.find_most_similar("berry"), "cherry")
+    print(test_dict.find_most_similar("aple"), "apple")
