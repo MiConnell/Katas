@@ -15,12 +15,12 @@ from typing import List
 
 
 def remove_duplicates(s: str) -> str:
-    return "".join(sorted(set(s)))
+    return "".join(sorted(set(str.lower(s))))
 
 
 def find_uniq(arr: List[str]) -> str:
-    sets = ["".join(sorted(set(str.lower(s)))) for s in arr]
-    dct = {remove_duplicates(str.lower("".join(sorted(a)))): a for a in arr}
+    sets = [remove_duplicates(s) for s in arr]
+    dct = {remove_duplicates(a): a for a in arr}
     final = dict(Counter(sets))
     for k, v in final.items():
         if v == 1:
