@@ -14,13 +14,14 @@ from collections import Counter
 from typing import List
 
 
+def remove_duplicates(s: str) -> str:
+    return "".join(sorted(set(s)))
+
+
 def find_uniq(arr: List[str]) -> str:
-    sets = [set(str.lower(s)) for s in arr]
-    dct = {"".join(set(str.lower(a))): a for a in arr}
-    mid_list: List[str] = []
-    for s in sets:
-        mid_list.append(*s)
-    final = dict(Counter("".join(mid_list)))
+    sets = ["".join(sorted(set(str.lower(s)))) for s in arr]
+    dct = {remove_duplicates(str.lower("".join(sorted(a)))): a for a in arr}
+    final = dict(Counter(sets))
     for k, v in final.items():
         if v == 1:
             return dct[k]
@@ -28,4 +29,4 @@ def find_uniq(arr: List[str]) -> str:
 
 
 if __name__ == "__main__":
-    print(find_uniq(["Aa", "aaa", "aaaaa", "BbBb", "Aaaa", "AaAaAa", "a"]))
+    print(find_uniq(["abc", "acb", "bac", "foo", "bca", "cab", "cba"]))
