@@ -23,6 +23,7 @@ The first player who connects four items of the same color is the winner.
 
 You should return "Yellow", "Red" or "Draw" accordingly.
 """
+import time
 from typing import List
 
 COLUMNS = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5, "G": 6}
@@ -31,16 +32,15 @@ LAYOUT = {"A": 0, "B": 0, "C": 0, "D": 0, "E": 0, "F": 0, "G": 0}
 
 def who_is_winner(moves: List[str]) -> str:
     layout = LAYOUT
-    rows = ["" for _ in range(1, 7)]
-    board = [rows for _ in range(7)]
+    board = [["_" for _ in range(7)] for _ in range(6)]
     print(*board, sep="\n")
     for m in moves:
         col, piece = m.split("_")
-        board[COLUMNS[col]][layout[col]] = piece
-        print(col, piece, layout)
+        board[layout[col]][COLUMNS[col]] = piece[0]
         print(*board, sep="\n")
         layout[col] += 1
-    return "none"
+        time.sleep(2)
+    return "None"
 
 
 pieces_position_list = [
