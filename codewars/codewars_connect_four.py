@@ -65,12 +65,11 @@ def winning(board: List[List[str]], color: str) -> bool:
     for b in board:
         if check_row(b, color):
             return True
-    print(board_transposed)
     for b in board_transposed:  # type:ignore
         if check_col(b, color):  # type:ignore
             return True
-        # elif check_diag(b, color):
-        #     return True
+        elif check_diag(b, color):  # type:ignore
+            return True
     return False
 
 
@@ -88,7 +87,12 @@ def check_col(b: Tuple[str], color: str, target: int = 4) -> bool:
     return any(len(i) == target and i[0] == color for i in groups)
 
 
-pieces_position_list = [
+def check_diag(b: Tuple[str], color: str, target: int = 4) -> bool:
+    groups = [list(g) for _, g in groupby(b, key_func)]
+    return any(len(i) == target and i[0] == color for i in groups)
+
+
+col_check = [
     "A_Red",
     "G_Yellow",
     "A_Red",
@@ -103,5 +107,22 @@ pieces_position_list = [
     "B_Purple",
 ]
 
+row_check = [
+    "A_Red",
+    "G_Yellow",
+    "B_Red",
+    "E_Yellow",
+    "C_Red",
+    "G_Yellow",
+    "D_Red",
+    "B_Yellow",
+    "C_Green",
+    "C_Blue",
+    "D_Orange",
+    "B_Purple",
+]
+
+
 if __name__ == "__main__":
-    print(who_is_winner(pieces_position_list))
+    print(who_is_winner(col_check))
+    print(who_is_winner(row_check))
