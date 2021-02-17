@@ -2,7 +2,8 @@
 """
 Story
 
-A freak power outage at the zoo has caused all of the electric cage doors to malfunction and swing open...
+A freak power outage at the zoo has caused all of the electric cage
+doors to malfunction and swing open...
 
 All the animals are out and some of them are eating each other!
 It's a Zoo Disaster!
@@ -39,19 +40,24 @@ OUTPUT
 
 A list of strings (refer to the example below) where:
 
-    The first element is the initial zoo (same as INPUT)
-    The last element is a comma-separated string of what the zoo looks like when all the eating has finished
-    All other elements (2nd to last-1) are of the form X eats Y describing what happened
+The first element is the initial zoo (same as INPUT)
+
+The last element is a comma-separated string of what the zoo
+looks like when all the eating has finished
+
+All other elements (2nd to last-1) are of the form X eats Y
+describing what happened
 
 Notes
 
-    Animals can only eat things beside them
+Animals can only eat things beside them
 
-    Animals always eat to their LEFT before eating to their RIGHT
+Animals always eat to their LEFT before eating to their RIGHT
 
-    Always the LEFTMOST animal capable of eating will eat before any others
+Always the LEFTMOST animal capable of eating will eat before any others
 
-    Any other things you may find at the zoo (which are not listed above) do not eat anything and are not edible
+Any other things you may find at the zoo (which are not listed above)
+do not eat anything and are not edible
 
 Example
 
@@ -97,3 +103,39 @@ Output
 ["fox,bug,chicken,grass,sheep", "chicken eats bug", "fox eats chicken", "sheep eats grass", "fox eats sheep", "fox"]
 
 """
+from typing import List
+
+HIERARCHY = {
+    "antelope": "grass",
+    "big-fish": "little-fish",
+    "bug": "leaves",
+    "bear": ["big-fish", "bug", "chicken", "cow", "leaves", "sheep"],
+    "chicken": "bug",
+    "cow": "grass",
+    "fox": ["chicken", "sheep"],
+    "giraffe": "leaves",
+    "lion": ["antelope", "cow"],
+    "panda": "leaves",
+    "sheep": "grass",
+}
+
+
+def who_eats_whom(zoo: str) -> List[str]:
+    animals = zoo.split(",")
+    for h, animal in enumerate(animals):
+        try:
+            if animals[h + 1] in HIERARCHY[animal]:
+                print(animal)
+            elif animals[h - 1] in HIERARCHY[animal]:
+                print(animal)
+        except KeyError:
+            print(f"{animal} don't eat nothin")
+        except IndexError:
+            print("Reached the end")
+    return [zoo, zoo]
+
+
+z = "fox,bug,chicken,grass,sheep"
+
+if __name__ == "__main__":
+    print(who_eats_whom(z))
