@@ -24,6 +24,8 @@ The first player who connects four items of the same color is the winner.
 You should return "Yellow", "Red" or "Draw" accordingly.
 """
 import time
+from itertools import groupby
+from typing import Any
 from typing import List
 from typing import Tuple
 
@@ -38,59 +40,47 @@ def who_is_winner(moves: List[str]) -> str:
     print(*board, sep="\n")
     for m in moves:
         col, piece = m.split("_")
-        winning(board, (layout[col], COLUMNS[col]), piece[0])
-        if not winning(board, (layout[col], COLUMNS[col]), piece[0]):
+        if not winning(board, piece[0]):
             print(f"{piece} played in column {col}")
             board[layout[col]][COLUMNS[col]] = piece[0]
             print(*board, sep="\n")
             layout[col] += 1
-        # # time.sleep(2)
+        time.sleep(2)
     return piece
 
 
-def winning(board: List[List[str]], position: Tuple[int, int], color: str) -> bool:
-    up = (1, 0)
-    down = (-1, 0)
-    left = (0, -1)
-    right = (0, 1)
-    up_left = (1, -1)
-    up_right = (1, 1)
-    down_left = (-1, -1)
-    down_right = (-1, 1)
-    if board[position[0]][position[1]] == color:
-        print(color)
+def winning(board: List[List[str]], color: str) -> bool:
+    # up = (1, 0)
+    # down = (-1, 0)
+    # left = (0, -1)
+    # right = (0, 1)
+    # up_left = (1, -1)
+    # up_right = (1, 1)
+    # down_left = (-1, -1)
+    # down_right = (-1, 1)
+    for b in board:
+        check_row(b, color)
     return False
 
 
+def key_func(x: Any) -> Any:
+    return x[0]
+
+
+def check_row(b: List[str], color: str, target: int = 4) -> bool:
+    groups = [list(g) for _, g in groupby(b, key_func)]
+    return any(len(i) == target and i[0] == color for i in groups)
+
+
 pieces_position_list = [
-    "C_Yellow",
-    "E_Red",
-    "G_Yellow",
-    "B_Red",
-    "D_Yellow",
-    "B_Red",
-    "B_Yellow",
-    "G_Red",
-    "C_Yellow",
-    "C_Red",
-    "D_Yellow",
-    "F_Red",
-    "E_Yellow",
-    "A_Red",
-    "A_Yellow",
-    "G_Red",
-    "A_Yellow",
-    "F_Red",
-    "F_Yellow",
-    "D_Red",
-    "B_Yellow",
-    "E_Red",
-    "D_Yellow",
     "A_Red",
     "G_Yellow",
-    "D_Red",
-    "D_Yellow",
+    "B_Red",
+    "A_Yellow",
     "C_Red",
+    "C_Yellow",
+    "D_Red",
+    "B_Yellow",
 ]
 
 if __name__ == "__main__":
