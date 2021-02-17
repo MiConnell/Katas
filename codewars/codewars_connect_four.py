@@ -61,11 +61,14 @@ def winning(board: List[List[str]], color: str) -> bool:
     # up_right = (1, 1)
     # down_left = (-1, -1)
     # down_right = (-1, 1)
+    board_transposed = list(zip(*board))
     for b in board:
         if check_row(b, color):
             return True
-        # elif check_col(b, color):
-        #     return True
+    print(board_transposed)
+    for b in board_transposed:  # type:ignore
+        if check_col(b, color):  # type:ignore
+            return True
         # elif check_diag(b, color):
         #     return True
     return False
@@ -80,14 +83,19 @@ def check_row(b: List[str], color: str, target: int = 4) -> bool:
     return any(len(i) == target and i[0] == color for i in groups)
 
 
+def check_col(b: Tuple[str], color: str, target: int = 4) -> bool:
+    groups = [list(g) for _, g in groupby(b, key_func)]
+    return any(len(i) == target and i[0] == color for i in groups)
+
+
 pieces_position_list = [
     "A_Red",
     "G_Yellow",
-    "B_Red",
-    "A_Yellow",
-    "C_Red",
+    "A_Red",
+    "B_Yellow",
+    "A_Red",
     "C_Yellow",
-    "D_Red",
+    "A_Red",
     "B_Yellow",
     "C_Green",
     "C_Blue",
