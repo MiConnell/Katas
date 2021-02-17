@@ -40,12 +40,15 @@ def who_is_winner(moves: List[str]) -> str:
     print(*board, sep="\n")
     for m in moves:
         col, piece = m.split("_")
-        if not winning(board, piece[0]):
-            print(f"{piece} played in column {col}")
-            board[layout[col]][COLUMNS[col]] = piece[0]
-            print(*board, sep="\n")
-            layout[col] += 1
-        time.sleep(2)
+        print(f"{piece} played in column {col}")
+        board[layout[col]][COLUMNS[col]] = piece[0]
+        print(layout[col], COLUMNS[col])
+        print(*board, sep="\n")
+        layout[col] += 1
+        if not winning(board, piece[0]) and piece != "_":
+            time.sleep(1)
+        else:
+            return piece
     return piece
 
 
@@ -59,7 +62,12 @@ def winning(board: List[List[str]], color: str) -> bool:
     # down_left = (-1, -1)
     # down_right = (-1, 1)
     for b in board:
-        check_row(b, color)
+        if check_row(b, color):
+            return True
+        # elif check_col(b, color):
+        #     return True
+        # elif check_diag(b, color):
+        #     return True
     return False
 
 
@@ -81,6 +89,10 @@ pieces_position_list = [
     "C_Yellow",
     "D_Red",
     "B_Yellow",
+    "C_Green",
+    "C_Blue",
+    "D_Orange",
+    "B_Purple",
 ]
 
 if __name__ == "__main__":
