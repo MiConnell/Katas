@@ -26,6 +26,7 @@ You should return "Yellow", "Red" or "Draw" accordingly.
 import time
 from itertools import groupby
 from typing import Any
+from typing import Dict
 from typing import List
 from typing import Tuple
 
@@ -33,63 +34,55 @@ COLUMNS = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5, "G": 6}
 LAYOUT = {"A": 0, "B": 0, "C": 0, "D": 0, "E": 0, "F": 0, "G": 0}
 
 
-def who_is_winner(moves: List[str]) -> str:
-    layout = LAYOUT
-    board = [["_"] * 7 for _ in range(6)]
-    piece = "Draw"
-    print(*board, sep="\n")
-    for m in moves:
-        col, piece = m.split("_")
-        print(f"{piece} played in column {col}")
-        board[layout[col]][COLUMNS[col]] = piece[0]
-        print(layout[col], COLUMNS[col])
-        print(*board, sep="\n")
-        layout[col] += 1
-        if not winning(board, piece[0]) and piece != "_":
-            time.sleep(1)
-        else:
-            return piece
-    return piece
+class ConnectFour:
+    def __init__(self, moves: List[str], layout: Dict[str, int] = LAYOUT) -> None:
+        self.moves = moves
+        self.board = [["_"] * 7 for _ in range(6)]
+        self.layout = layout
 
+    def who_is_winner(self) -> str:
+        self.piece = "Draw"
+        print(*self.board, sep="\n")
+        for m in self.moves:
+            self.col, self.piece = m.split("_")
+            print(f"{self.piece} played in column {self.col}")
+            self.board[self.layout[self.col]][COLUMNS[self.col]] = self.piece[0]
+            print(self.layout[self.col], COLUMNS[self.col])
+            print(*self.board, sep="\n")
+            self.layout[self.col] += 1
+            if not self._winning(self.piece[0]) and self.piece != "_":
+                time.sleep(1)
+            else:
+                return f"***{self.piece} wins in column {self.col}!***"
+        return self.piece
 
-def winning(board: List[List[str]], color: str) -> bool:
-    # up = (1, 0)
-    # down = (-1, 0)
-    # left = (0, -1)
-    # right = (0, 1)
-    # up_left = (1, -1)
-    # up_right = (1, 1)
-    # down_left = (-1, -1)
-    # down_right = (-1, 1)
-    board_transposed = list(zip(*board))
-    for b in board:
-        if check_row(b, color):
-            return True
-    for b in board_transposed:  # type:ignore
-        if check_col(b, color):  # type:ignore
-            return True
-        elif check_diag(b, color):  # type:ignore
-            return True
-    return False
+    def _winning(self, color: str) -> bool:
+        self.color = color
+        self.board_transposed = list(zip(*self.board))
+        for b in self.board:
+            if self._check_row(b, self.color):
+                return True
+        for b in self.board_transposed:  # type:ignore
+            if self._check_col(b, self.color):  # type:ignore
+                return True
+        return False
 
+    def _key_func(self, x: Any) -> Any:
+        return x[0]
 
-def key_func(x: Any) -> Any:
-    return x[0]
+    def _check_row(self, b: List[str], color: str, target: int = 4) -> bool:
+        self.b = b
+        self.color = color
+        self.target = target
+        self.groups = [list(g) for _, g in groupby(self.b, self._key_func)]
+        return any(len(i) == target and i[0] == color for i in self.groups)
 
-
-def check_row(b: List[str], color: str, target: int = 4) -> bool:
-    groups = [list(g) for _, g in groupby(b, key_func)]
-    return any(len(i) == target and i[0] == color for i in groups)
-
-
-def check_col(b: Tuple[str], color: str, target: int = 4) -> bool:
-    groups = [list(g) for _, g in groupby(b, key_func)]
-    return any(len(i) == target and i[0] == color for i in groups)
-
-
-def check_diag(b: Tuple[str], color: str, target: int = 4) -> bool:
-    groups = [list(g) for _, g in groupby(b, key_func)]
-    return any(len(i) == target and i[0] == color for i in groups)
+    def _check_col(self, b: List[str], color: str, target: int = 4) -> bool:
+        self.b = b
+        self.color = color
+        self.target = target
+        self.groups = [list(g) for _, g in groupby(b, self._key_func)]
+        return any(len(i) == target and i[0] == color for i in self.groups)
 
 
 col_check = [
@@ -124,5 +117,7 @@ row_check = [
 
 
 if __name__ == "__main__":
-    print(who_is_winner(col_check))
-    print(who_is_winner(row_check))
+    r = ConnectFour(row_check)
+    print(r.who_is_winner())
+    c = ConnectFour(col_check)
+    print(c.who_is_winner())
