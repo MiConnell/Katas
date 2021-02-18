@@ -67,7 +67,8 @@ class ConnectFour:
         ) or any(self._check_row(b, self.color) for b in self.board)
 
     def _key_func(self, x: Any) -> Any:
-        return x[0]
+        self.x = x
+        return self.x[0]
 
     def _check_row(self, b: List[str], color: str, target: int = 4) -> bool:
         self.b = b
