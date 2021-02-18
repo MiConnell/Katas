@@ -129,25 +129,18 @@ def can_eat(predator: str, prey: str) -> bool:
 
 def who_eats_whom(zoo: str, structure: List[str] = []) -> List[str]:
     animals = zoo.split(",")
-    survivor = []
     for h, animal in enumerate(animals):
         if h >= 1:
-            if can_eat(animal, animals[h - 1]):
-                if len(animals) > 1:
-                    structure.append(f"{animal} eats {animals[h - 1]}")
-                    animals.remove(animals[h - 1])
-                    return who_eats_whom(",".join(animals), structure)
-                if len(animals) == 1:
-                    survivor.append(animals[0])
+            if can_eat(animal, animals[h - 1]) and len(animals) != 1:
+                structure.append(f"{animal} eats {animals[h - 1]}")
+                animals.remove(animals[h - 1])
+                return who_eats_whom(",".join(animals), structure)
         elif h < len(animals) - 1:
-            if can_eat(animal, animals[h + 1]):
-                if len(animals) > 1:
-                    structure.append(f"{animal} eats {animals[h + 1]}")
-                    animals.remove(animals[h + 1])
-                    return who_eats_whom(",".join(animals), structure)
-                if len(animals) == 1:
-                    survivor.append(animals[0])
-        elif h == 0 and len(animals) == 1:
+            if can_eat(animal, animals[h + 1]) and len(animals) != 1:
+                structure.append(f"{animal} eats {animals[h + 1]}")
+                animals.remove(animals[h + 1])
+                return who_eats_whom(",".join(animals), structure)
+        else:
             structure.append("".join(animals))
             return structure
     return []
