@@ -37,8 +37,8 @@ LAYOUT = {"A": 0, "B": 0, "C": 0, "D": 0, "E": 0, "F": 0, "G": 0}
 class ConnectFour:
     def __init__(self, moves: List[str], layout: Dict[str, int] = LAYOUT) -> None:
         self.moves = moves
-        self.board = [["_"] * 7 for _ in range(6)]
         self.layout = layout.copy()
+        self.board = [["_"] * 7 for _ in range(6)]
 
     def who_is_winner(self) -> str:
         self.draw = "Draw"
@@ -62,9 +62,9 @@ class ConnectFour:
     def _winning(self, color: str) -> bool:
         self.color = color
         self.board_transposed = list(zip(*self.board))
-        return any(
+        return any(self._check_row(b, self.color) for b in self.board) or any(
             self._check_col(b, self.color) for b in self.board_transposed  # type:ignore
-        ) or any(self._check_row(b, self.color) for b in self.board)
+        )
 
     def _key_func(self, x: Any) -> Any:
         self.x = x
