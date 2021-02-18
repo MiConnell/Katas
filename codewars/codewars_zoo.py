@@ -120,19 +120,37 @@ HIERARCHY = {
 }
 
 
-def who_eats_whom(zoo: str) -> List[str]:
+def can_eat(predator: str, prey: str) -> bool:
+    try:
+        return prey in HIERARCHY[predator]
+    except KeyError:
+        return False
+
+
+def who_eats_whom(zoo: str, structure: List[str] = []) -> List[str]:
     animals = zoo.split(",")
+    survivor = []
     for h, animal in enumerate(animals):
-        try:
-            if animals[h + 1] in HIERARCHY[animal]:
-                print(animal)
-            elif animals[h - 1] in HIERARCHY[animal]:
-                print(animal)
-        except KeyError:
-            print(f"{animal} don't eat nothin")
-        except IndexError:
-            print("Reached the end")
-    return [zoo, zoo]
+        if h >= 1:
+            if can_eat(animal, animals[h - 1]):
+                if len(animals) > 1:
+                    structure.append(f"{animal} eats {animals[h - 1]}")
+                    animals.remove(animals[h - 1])
+                    return who_eats_whom(",".join(animals), structure)
+                if len(animals) == 1:
+                    survivor.append(animals[0])
+        elif h < len(animals) - 1:
+            if can_eat(animal, animals[h + 1]):
+                if len(animals) > 1:
+                    structure.append(f"{animal} eats {animals[h + 1]}")
+                    animals.remove(animals[h + 1])
+                    return who_eats_whom(",".join(animals), structure)
+                if len(animals) == 1:
+                    survivor.append(animals[0])
+        elif h == 0 and len(animals) == 1:
+            structure.append("".join(animals))
+            return structure
+    return []
 
 
 z = "fox,bug,chicken,grass,sheep"
