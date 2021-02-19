@@ -19,4 +19,13 @@ Hint: You're not meant to calculate the factorial. Find another way to find the 
 
 
 def zeros(factorial: int) -> int:
-    pass
+    count = 0
+    while factorial >= 5:
+        factorial //= 5
+        count += factorial
+    return count
+
+
+test = 251019534
+if __name__ == "__main__":
+    print(zeros(test))
