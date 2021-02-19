@@ -29,7 +29,32 @@ Notes
 it may happen that the input string have leading,
 trailing whitespaces and more than a unique whitespace between two consecutive numbers
 """
+from typing import List
 
 
 def order_weight(weights: str) -> str:
-    return weights
+    weight_list = weights.split(" ")
+    weight_dict = {
+        k: v
+        for k, v in sorted(
+            {w: sum(int(i) for i in w) for w in weight_list}.items(),
+            key=lambda item: item[1],
+        )
+    }
+    lst = []
+    sorting: List[str] = []
+    current = -1
+    for k, v in weight_dict.items():
+        if v > current:
+            current = v
+            if sorting:
+                lst.append(" ".join(sorted(sorting)))
+            sorting.clear()
+            lst.append(k)
+        elif v == current:
+            sorting.append(k)
+    return " ".join(lst)
+
+
+if __name__ == "__main__":
+    print(order_weight("2000 10003 1234000 44444444 9999 11 11 22 123"))
