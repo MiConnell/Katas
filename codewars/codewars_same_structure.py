@@ -25,11 +25,17 @@ from typing import List
 
 
 def same_structure_as(first: List[Any], second: List[Any]) -> bool:
-    return len(first) == len(second)
+    if type(first) != type(second) or len(first) != len(second):
+        return False
+    for f, s in zip(first, second):
+        if type(f) != type(s):
+            return False
+        if type(f) is list and type(s) is list and not same_structure_as(f, s):
+            return False
+    return True
 
 
-test_one = [1, [1, 1]]
-test_two = [2, 2, 2]
+test_one, test_two = [1, [1, 1]], [[2, 2], 2]
 
 if __name__ == "__main__":
     print(same_structure_as(test_one, test_two))
