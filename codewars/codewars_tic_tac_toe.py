@@ -20,3 +20,24 @@ We want our function to return:
 You may assume that the board passed in is valid in the context of a game of Tic-Tac-Toe.
 
 """
+from typing import List
+
+
+def is_solved(board: List[List[int]]) -> int:
+    for row in board:
+        if (row[0] == row[1] and row[0] == row[2]) and row[0] != 0:
+            return 1 if row[0] == 1 else 2
+    for i in range(3):
+        if (board[0][i] == board[1][i] and board[0][i] == board[2][i]) and board[0][
+            i
+        ] != 0:
+            return 1 if board[0][i] == 1 else 2
+    if (board[0][0] == board[1][1] == board[2][2]) and board[0][0] != 0:
+        return 1 if board[0][0] == 1 else 2
+    if (board[2][0] == board[1][1] == board[0][2]) and board[0][0] != 0:
+        return 1 if board[2][0] == 1 else 2
+    for row in board:
+        for i in row:
+            if i == 0:
+                return -1
+    return 0
