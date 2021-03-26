@@ -8,4 +8,14 @@ from typing import List
 
 
 def move_zeros(array: List[int]):
-    return array
+    upd = [a for a in array if a != 0]
+    diff = len(array) - len(upd)
+    for _ in range(diff):
+        upd.append(0)
+    return upd
+
+
+arr = [1, 0, 1, 2, 0, 1, 3]
+
+if __name__ == "__main__":
+    print(move_zeros(arr))
