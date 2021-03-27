@@ -24,11 +24,11 @@ another adjacent digit (horizontally or vertically, but not diagonally).
 E.g. instead of the 1 it could also be the 2 or 4. And instead of the 5 it could also be the 2, 4, 6 or 8.
 
 He also mentioned, he knows this kind of locks. You can enter an unlimited amount of wrong PINs,
-they never finally lock the system or sound the alarm. That's why we can try out all possible (*) variations.
+they never midly lock the system or sound the alarm. That's why we can try out all possible (*) variations.
 
 * possible in sense of: the observed PIN itself and all variations considering the adjacent digits
 
-Can you help us to find all those variations? It would be nice to have a function,
+Can you help us to find all those variations? It would be nice to have a function
 that returns an array (or a list in Java and C#) of all variations for an observed PIN with a length of 1 to 8 digits.
 We could name the function getPINs (get_pins in python, GetPINs in C#).
 But please note that all PINs, the observed one and also the results, must be strings,
@@ -37,3 +37,29 @@ because of potentially leading '0's. We already prepared some test cases for you
 Detective, we are counting on you!
 
 """
+import itertools
+from typing import List
+
+VARIATIONS = {
+    "1": ["2", "4"],
+    "2": ["1", "3", "5"],
+    "3": ["2", "6"],
+    "4": ["1", "5", "7"],
+    "5": ["2", "4", "6", "8"],
+    "6": ["3", "5", "9"],
+    "7": ["4", "8"],
+    "8": ["0", "5", "7", "9"],
+    "9": ["6", "8"],
+    "0": ["8"],
+}
+
+
+def get_pins(observed: str) -> List[str]:
+    mid = [[o] + VARIATIONS[o] for o in observed]
+    return ["".join(p) for p in list(itertools.product(*mid))]
+
+
+test_pin = "88888888"
+
+if __name__ == "__main__":
+    print(get_pins(test_pin))
