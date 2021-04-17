@@ -28,7 +28,15 @@ BAAA = 4
 QUESTION = 24572
 BOOKKEEPER = 10743
 """
+import itertools
 
 
-def listPosition(word: str) -> int:
-    return 0
+def list_position(word: str) -> int:
+    combs = itertools.permutations(word, (len(word)))
+    all_list = sorted(["".join(i) for i in combs])
+    res = {c: i for i, c in enumerate(all_list, start=1)}
+    return res[word]
+
+
+if __name__ == "__main__":
+    print(list_position("QUESTION"))
